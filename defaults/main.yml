@@ -1,0 +1,78 @@
+# Groovy init script name
+jenkins_rbs_script_name: role-based-auth-strategy.groovy
+# Time to wait after a Jenkins restart
+jenkins_rbs_wait_after_restart: 60
+# Jenkins home
+jenkins_rbs_home: /var/lib/jenkins
+# Jenkins process user/group
+jenkins_rbs_process_user: jenkins
+jenkins_rbs_process_group: "{{ jenkins_process_user }}"
+# Jenkins host and port
+jenkins_rbs_host: 127.0.0.1
+jenkins_rbs_port: 8080
+
+# Default roles and permissions
+#  This approach is based on the assumption that
+#  there should be at least 2 global roles:
+#   - One for authenticated users who can only view Jenkins home page
+#   - And another for the admin user who can manage everything
+jenkins_rbs_default_roles:
+- name: authenticated
+  type: RoleBasedAuthorizationStrategy.GLOBAL
+  overwrite: "true"
+  pattern: ".*"
+  permissions:
+  # Overall
+  - hudson.model.Hudson.Read
+  
+- name: admin
+  type: RoleBasedAuthorizationStrategy.GLOBAL
+  overwrite: "true"
+  pattern: ".*"
+  permissions:
+  # Overall
+  - hudson.model.Hudson.Administer
+  - hudson.model.Hudson.Read
+  # Credentials
+  - com.cloudbees.plugins.credentials.CredentialsProvider.Create
+  - com.cloudbees.plugins.credentials.CredentialsProvider.Delete
+  - com.cloudbees.plugins.credentials.CredentialsProvider.ManageDomains
+  - com.cloudbees.plugins.credentials.CredentialsProvider.Update
+  - com.cloudbees.plugins.credentials.CredentialsProvider.View
+  # Agent
+  - hudson.model.Computer.Build
+  - hudson.model.Computer.Configure
+  - hudson.model.Computer.Connect
+  - hudson.model.Computer.Create
+  - hudson.model.Computer.Delete
+  - hudson.model.Computer.Disconnect
+  # Job
+  - hudson.model.Item.Build
+  - hudson.model.Item.Cancel
+  - hudson.model.Item.Configure
+  - hudson.model.Item.Create
+  - hudson.model.Item.Delete
+  - hudson.model.Item.Discover
+  - hudson.model.Item.Read
+  - hudson.model.Item.Workspace
+  # Run
+  - hudson.model.Run.Delete
+  - hudson.model.Run.Update
+  # View
+  - hudson.model.View.Configure
+  - hudson.model.View.Create
+  - hudson.model.View.Delete
+  - hudson.model.View.Read
+  # SCM
+  - hudson.scm.SCM.Tag
+  # Plugin Manager
+  - hudson.model.Hudson.UploadPlugins
+  - hudson.model.Hudson.ConfigureUpdateCenter
+  # Scripts
+  - hudson.model.Hudson.RunScripts
+
+# Default users and roles
+jenkins_rbs_default_users:
+- name: admin
+  roles:
+  - admin

@@ -1,0 +1,14 @@
+# Define your roles and permissions
+jenkins_rbs_roles: []
+# - name: sampleRole                              => A unique name for this role
+#   type: RoleBasedAuthorizationStrategy.PROJECT  => Either RoleBasedAuthorizationStrategy.GLOBA or RoleBasedAuthorizationStrategy.PROJECT
+#   overwrite: "true"                             => Whether this role should overwrite an existing role or not
+#   pattern: "(build-.*|deploy-.*)"               => A pattern for matching job names that this role will have access to
+#   permissions:                                  => A list of valid Jenkins permissions which could be built-in permissions or those added by installed plugins
+#   - hudson.model.Hudson.Read                    => For example, this one comes from https://javadoc.jenkins.io/jenkins/model/Jenkins.html
+#   - hudson.model.Item.Discover                  => And this one comes from https://javadoc.jenkins.io/hudson/model/Item.html
+#   - hudson.model.Computer                       => https://javadoc.jenkins.io/hudson/model/Computer.html
+#   - hudson.model.Run.Update                     => https://javadoc.jenkins.io/hudson/model/Run.html
+#   - hudson.model.View.Configure                 => https://javadoc.jenkins.io/hudson/model/View.html
+#   - hudson.scm.SCM.Tag                          => https://javadoc.jenkins.io/hudson/scm/SCM.html
+#

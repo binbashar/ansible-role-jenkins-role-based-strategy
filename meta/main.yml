@@ -1,0 +1,21 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: binbash_inc
+  description: "Enables and configures Jenkins Role-based Strategy."
+  company: "BinBash Inc"
+  license: "license (MIT)"
+  min_ansible_version: 2.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - web
+    - jenkins
+    - roles
+    - strategy

@@ -1,0 +1,26 @@
+---
+- name: Copy groovy script to jenkins init groovy directory
+  template:
+    src: "{{ jenkins_rbs_script_name }}.j2"
+    dest: "{{ jenkins_rbs_home }}/init.groovy.d/{{ jenkins_rbs_script_name }}"
+    owner: "{{ jenkins_rbs_process_user }}"
+    group: "{{ jenkins_rbs_process_group }}"
+    mode: 0775
+
+- name: Force Jenkins restart
+  service: name=jenkins state=restarted
+
+- name: Give some time for Jenkins to restart and apply the init scripts
+  uri:
+    url: "http://{{ jenkins_rbs_host }}:{{ jenkins_rbs_port }}/"
+    status_code: [200, 403]
+    timeout: 2
+  register: result
+  until: result.status == 200 or result.status == 403
+  retries: 12
+  delay: 4
+
+- name: Remove Jenkins security init scripts after restart
+  file:
+    path: "{{ jenkins_rbs_home }}/init.groovy.d/{{ jenkins_rbs_script_name }}"
+    state: absent

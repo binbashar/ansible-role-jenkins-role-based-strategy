@@ -1,0 +1,98 @@
+#!groovy
+import hudson.*
+import hudson.model.*
+import hudson.security.*
+import jenkins.*
+import jenkins.model.*
+import java.util.*
+import com.michelin.cio.hudson.plugins.rolestrategy.*
+import java.lang.reflect.*
+
+// ------------------------------------------------------------------------
+// 0) Init
+// ------------------------------------------------------------------------
+// Create a role-based authentication instance to add/assign roles
+RoleBasedAuthorizationStrategy roleBasedAuthenticationStrategy = new RoleBasedAuthorizationStrategy()
+
+
+// ------------------------------------------------------------------------
+// 1) Default Roles
+// ------------------------------------------------------------------------
+{% for role in jenkins_rbs_default_roles %}
+println "INFO: Set {{ role.name }} permissions."
+Set<String> {{ role.name | replace("-", "") }}DefaultPermissions = new HashSet<String>();
+{% for permission in role.permissions %}
+{{ role.name | replace("-", "") }}DefaultPermissions.add("{{ permission }}");
+{% endfor %}
+
+println "INFO: Add {{ role.name }} role."
+roleBasedAuthenticationStrategy.doAddRole(
+    {{ role.type }},
+    "{{ role.name }}",
+    {{ role.name | replace("-", "") }}DefaultPermissions.join(",").toString(),
+    "{{ role.overwrite }}",
+    "{{ role.pattern }}"
+);
+{% endfor %}
+
+
+// ------------------------------------------------------------------------
+// 2) User-defined Roles and Permissions
+// ------------------------------------------------------------------------
+{% for role in jenkins_rbs_roles %}
+println "INFO: Set {{ role.name }} permissions."
+Set<String> {{ role.name | replace("-", "") }}Permissions = new HashSet<String>();
+{% for permission in role.permissions %}
+{{ role.name | replace("-", "") }}Permissions.add("{{ permission }}");
+{% endfor %}
+
+println "INFO: Add {{ role.name }} role."
+roleBasedAuthenticationStrategy.doAddRole(
+    {{ role.type }},
+    "{{ role.name }}",
+    {{ role.name | replace("-", "") }}Permissions.join(",").toString(),
+    "{{ role.overwrite }}",
+    "{{ role.pattern }}"
+);
+{% endfor %}
+
+
+// ------------------------------------------------------------------------
+// 3) Default Roles Assignments
+// ------------------------------------------------------------------------
+{% for user in jenkins_rbs_default_users %}
+  {%- for role in user.roles %}
+println "INFO: Assign default role={{ role }} to user={{ user.name }}"
+roleBasedAuthenticationStrategy.doAssignRole(RoleBasedAuthorizationStrategy.GLOBAL, "{{ role }}", "{{ user.name }}");
+  {% endfor %}
+{% endfor %}
+
+
+// ------------------------------------------------------------------------
+// 4) User-defined Roles Assignments
+// ------------------------------------------------------------------------
+{% for user in jenkins_rbs_users %}
+{% for role in user.roles %}
+
+  {%- for default_role in jenkins_rbs_default_roles if default_role.name == role %}
+  {%- set role_type = default_role.type %}
+println "INFO: Assign custom role={{ role }} of type={{ role_type }} to user={{ user.name }}"
+roleBasedAuthenticationStrategy.doAssignRole({{ role_type }}, "{{ role }}", "{{ user.name }}");
+  {% endfor %}
+
+  {%- for custom_role in jenkins_rbs_roles if custom_role.name == role %}
+  {%- set role_type = custom_role.type %}
+println "INFO: Assign custom role={{ role }} of type={{ role_type }} to user={{ user.name }}"
+roleBasedAuthenticationStrategy.doAssignRole({{ role_type }}, "{{ role }}", "{{ user.name }}");
+  {%- endfor %}
+
+{% endfor %}
+{% endfor %}
+
+
+// ------------------------------------------------------------------------
+// 5) Apply Changes
+// ------------------------------------------------------------------------
+def jenkinsInstance = Jenkins.getInstance()
+jenkinsInstance.setAuthorizationStrategy(roleBasedAuthenticationStrategy)
+jenkinsInstance.save()

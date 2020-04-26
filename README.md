@@ -1,2 +1,6 @@
-# ansible-role-jenkins-role-based-strategy
-Ansible role for configuring Jenkins role-based strategy
+# Binbash - Ansible Role: Jenkins Role-based Strategy
+
+Ansible role for enabling and configuring Jenkins Role-based Strategy.
+
+## Requirements
+* Jenkins with Role-based Strategy plugin installed
