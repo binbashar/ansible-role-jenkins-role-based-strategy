@@ -1,3 +1,4 @@
+---
 # Groovy init script name
 jenkins_rbs_script_name: role-based-auth-strategy.groovy
 # Time to wait after a Jenkins restart
