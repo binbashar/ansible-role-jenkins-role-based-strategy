@@ -14,7 +14,15 @@
   roles:
     - role: geerlingguy.java
     - role: geerlingguy.jenkins
+
     - role: binbash_inc.ansible_role_jenkins_role_based_strategy
+      jenkins_rbs_users:
+        - name: user1
+          roles:
+            - admin
+        - name: user2
+          roles:
+            - authenticated
 
   post_tasks:
     - name: Check if Jenkins is running.
