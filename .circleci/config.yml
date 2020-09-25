@@ -33,8 +33,8 @@ jobs:
       - run:
           name: re-install docker
           command: |
-            pip install --user docker-py
-            pip install --user python3-docker
+            pip install --user -I docker-py
+            pip install --user -I docker
 
       - run:
           name: tests-ansible-molecule-lint-e2e
