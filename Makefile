@@ -15,7 +15,7 @@ ANSIBLE_REPO_ROLE_NAME   := ansible-role-jenkins-role-based-strategy
 #endef
 
 define OS_VER_LIST
-"ubuntu1804"
+"ubuntu1604"
 endef
 
 help:

@@ -3,7 +3,18 @@
   hosts: all
   become: true
 
+  vars:
+    ansible_python_interpreter: '/usr/bin/python3'
+    when: ansible_os_family == "Debian"
+
   pre_tasks:
+#    - name: Check ansible version
+#      assert:
+#        that:
+#        - "ansible_distribution_version is version_compare('2.9.6', '>=')"
+#        msg: Use Ansible to 2.9.6 or later to run this playbook
+#      delegate_to: localhost
+
     - include_tasks: java-8.yml
 
     - include_tasks: java-11.yml
