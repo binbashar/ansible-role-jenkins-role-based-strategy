@@ -19,7 +19,9 @@
     - role: geerlingguy.java
     - role: geerlingguy.jenkins
       jenkins_plugins:
-        - role-based
+        - matrix-auth
+        - extended-read-permission
+        - role-strategy
 
     - role: binbash_inc.ansible_role_jenkins_role_based_strategy
       jenkins_rbs_users:
