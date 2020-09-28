@@ -6,15 +6,8 @@ MAKEFILES_DIR := ./@bin/makefiles
 ANSIBLE_GALAXY_ROLE_NAME := binbash_inc.ansible_role_jenkins_role_based_strategy
 ANSIBLE_REPO_ROLE_NAME   := ansible-role-jenkins-role-based-strategy
 
-#define OS_VER_LIST
-#"ubuntu1804" \
-#"ubuntu1604" \
-#"debian10" \
-#"debian9" \
-#"debian8"
-#endef
-
 define OS_VER_LIST
+"ubuntu1804" \
 "ubuntu1604"
 endef
 
