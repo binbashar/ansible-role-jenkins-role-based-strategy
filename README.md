@@ -8,7 +8,7 @@ Ansible role for enabling and configuring Jenkins Role-based Strategy.
 ## Examples
 The following example defines a couple of users and assigns the built-in roles to each of them:
 ```
-  - role: binbash_inc.jenkins-role-based-strategy
+  - role: binbash_inc.ansible_role_jenkins_role_based_strategy
     jenkins_rbs_users:
     - name: user1
       roles:
@@ -20,7 +20,7 @@ The following example defines a couple of users and assigns the built-in roles t
 
 The example below defines a custom roles and assigns it to a custom user:
 ```
-  - role: binbash_inc.jenkins-role-based-strategy
+  - role: binbash_inc.ansible_role_jenkins_role_based_strategy
     jenkins_rbs_roles:
     - name: app1-deployer
       type: RoleBasedAuthorizationStrategy.GLOBAL

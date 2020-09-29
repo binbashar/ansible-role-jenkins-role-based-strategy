@@ -1,5 +1,7 @@
+---
 # Define your roles and permissions
 jenkins_rbs_roles: []
+
 # - name: sampleRole                              => A unique name for this role
 #   type: RoleBasedAuthorizationStrategy.PROJECT  => Either RoleBasedAuthorizationStrategy.GLOBA or RoleBasedAuthorizationStrategy.PROJECT
 #   overwrite: "true"                             => Whether this role should overwrite an existing role or not
@@ -11,4 +13,3 @@ jenkins_rbs_roles: []
 #   - hudson.model.Run.Update                     => https://javadoc.jenkins.io/hudson/model/Run.html
 #   - hudson.model.View.Configure                 => https://javadoc.jenkins.io/hudson/model/View.html
 #   - hudson.scm.SCM.Tag                          => https://javadoc.jenkins.io/hudson/scm/SCM.html
-#

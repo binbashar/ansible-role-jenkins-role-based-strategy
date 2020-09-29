@@ -1,0 +1,38 @@
+---
+- name: jenkins_role_based_strategy
+  hosts: all
+  become: true
+
+  vars:
+    ansible_python_interpreter: '/usr/bin/python3'
+    when: ansible_os_family == "Debian"
+
+  pre_tasks:
+    - include_tasks: java-8.yml
+
+    - include_tasks: java-11.yml
+      when:
+        - ansible_distribution == 'Debian'
+        - ansible_distribution_major_version == '10'
+
+  roles:
+    - role: geerlingguy.java
+    - role: geerlingguy.jenkins
+      jenkins_plugins:
+        - matrix-auth
+        - extended-read-permission
+        - role-strategy
+
+    - role: binbash_inc.ansible_role_jenkins_role_based_strategy
+      jenkins_rbs_users:
+        - name: user1
+          roles:
+            - admin
+        - name: user2
+          roles:
+            - authenticated
+
+  post_tasks:
+    - name: Check if Jenkins is running.
+      uri:
+        url: "http://127.0.0.1:8080/"
