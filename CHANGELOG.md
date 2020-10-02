@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v0.0.4"></a>
+## [v0.0.4] - 2020-10-02
+
+- BBL-381 | integrating circleci w/ sumologic + readme.md updated
+
+
 <a name="v0.0.3"></a>
 ## [v0.0.3] - 2020-09-29
 
@@ -46,6 +52,7 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.4...HEAD
+[v0.0.4]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.3...v0.0.4
 [v0.0.3]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.2...v0.0.3
 [v0.0.2]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.1...v0.0.2
