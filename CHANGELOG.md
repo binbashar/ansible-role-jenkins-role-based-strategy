@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v0.0.5"></a>
+## [v0.0.5] - 2020-11-15
+
+- BBL-440 | improving Makefile init-makefiles w/ fixed version
+
+
 <a name="v0.0.4"></a>
 ## [v0.0.4] - 2020-10-02
 
@@ -52,7 +58,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.4...HEAD
+[Unreleased]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.5...HEAD
+[v0.0.5]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.4...v0.0.5
 [v0.0.4]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.3...v0.0.4
 [v0.0.3]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.2...v0.0.3
 [v0.0.2]: https://github.com/binbashar/ansible-role-jenkins-role-based-strategy/compare/v0.0.1...v0.0.2
